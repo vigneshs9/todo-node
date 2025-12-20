@@ -5,7 +5,6 @@ const { check, validationResult } = require('express-validator');
 
 router.post('/', [
  check('name').notEmpty().withMessage('Username is required'),
- check('email').isEmail().withMessage('Email is required'),
  check('password').notEmpty().withMessage('Password is required')
 ], (req, res) => {
  const errors = validationResult(req);
@@ -28,5 +27,17 @@ router.post('/fetch',  [
   loginController.fetchUser(req, res);
  }
 })
-
+router.post('/signup', [
+ check('name').notEmpty().withMessage('Username is required'),
+ check('email').notEmpty().isEmail().withMessage('Email is required'),
+ check('password').notEmpty().withMessage('Password is required')
+], (req, res) => {
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
+ }
+ else {
+  loginController.signupUser(req, res);
+ }
+})
 module.exports = router;

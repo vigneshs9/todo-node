@@ -9,6 +9,15 @@ exports.loginUser = async (req, res) => {
   res.status(500).json({ success: false, message: error.message });
  }
 };
+exports.signupUser = async (req, res) => {
+ try {
+  const reqParams = req.body || {};
+  const result = await loginModel.signupUser(reqParams);
+  res.status(200).json(result);
+ } catch (error) {
+  res.status(500).json({ success: false, message: error.message });
+ }
+};
 exports.fetchUser = async (req, res) => {
  try {
   const reqParams = req.body || {};
