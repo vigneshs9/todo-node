@@ -7,3 +7,4 @@ global.PASSWORD = process.env.PASSWORD;
 global.SECRET_KEY = process.env.SECRET_KEY;
 
 global.USERS_COLLECTION = 'users';
+global.TODOS_COLLECTION = 'todos';

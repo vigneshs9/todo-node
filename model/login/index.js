@@ -5,7 +5,7 @@ exports.loginUser = async (reqParams) => {
   const db = await mongo.getDB();
   const user = await db.collection(USERS_COLLECTION).findOne({ name: { $regex: `^${name}$`, $options: 'i' }, password });
   if (user) {
-   return { status: true, message: 'Login successful', userId: user._id };
+   return { status: true, message: 'Login successful', userId: user._id, userName: user.name };
   } else {
    throw new Error('Invalid username or password');
   }
