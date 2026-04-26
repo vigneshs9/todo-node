@@ -40,4 +40,28 @@ router.post('/signup', [
   loginController.signupUser(req, res);
  }
 })
+router.post('/changePassword', [
+ check('name').notEmpty().withMessage('Username is required'),
+ check('oldPassword').notEmpty().withMessage('Old password is required'),
+ check('newPassword').notEmpty().withMessage('New password is required')
+], (req, res) => {
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
+ }
+ else {
+  loginController.changePassword(req, res);
+ }
+})
+router.post('/forgotPassword', [
+ check('email').notEmpty().isEmail().withMessage('Email is required')
+], (req, res) => {
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
+ }
+ else {
+  loginController.forgotPassword(req, res);
+ }
+})
 module.exports = router;
