@@ -29,10 +29,6 @@ exports.signupUser = async (reqParams) => {
  try {
   const { name, email, password } = reqParams;
   const hashedPassword = await hashPwd.hashPassword(password);
-  const isUserExists = await findUserByEmail(email);
-  if (isUserExists) {
-   throw new Error('User already exists with this email');
-  }
   const db = await mongo.getDB();
   const insertObj = { name, email, password: hashedPassword, createdAt: new Date() };
   const result = await db.collection(USERS_COLLECTION).insertOne(insertObj);
@@ -42,7 +38,10 @@ exports.signupUser = async (reqParams) => {
    throw new Error('User registration failed');
   }
  } catch (error) {
-  throw new Error(error.message);
+  if (error.code == 11000) {
+   throw error
+  }
+  throw new Error(error);
  }
 }
 exports.changePassword = async (reqParams) => {
