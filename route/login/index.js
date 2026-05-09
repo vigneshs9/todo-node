@@ -64,4 +64,17 @@ router.post('/forgotPassword', [
   loginController.forgotPassword(req, res);
  }
 })
+router.post('/uploadProfile', [
+ check('userId').notEmpty().isMongoId().withMessage('User ID is required'),
+ check('filePath').notEmpty().withMessage('Profile path is required')
+], (req, res) => {
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
+ }
+ else {
+  loginController.uploadProfile(req, res);
+ }
+})
+
 module.exports = router;

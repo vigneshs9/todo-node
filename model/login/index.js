@@ -1,9 +1,10 @@
+const e = require('express');
 const mongo = require('../../config/db');
 const hashPwd = require('../../config/password_hashing');
 exports.loginUser = async (reqParams) => {
  try {
   const user = await fetchUserWithPassword(reqParams);
-  return { status: true, message: 'Login successful', userId: user._id, userName: user.name };
+  return { status: true, message: 'Login successful', userId: user._id, userName: user.name, profilePath: user.profilePath || null };
  } catch (error) {
   throw new Error('Login failed: ' + error.message);
  }
@@ -98,5 +99,15 @@ exports.forgotPassword = async (reqParams) => {
   }
  } catch (error) {
   throw new Error(error.message);
+ }
+}
+exports.uploadProfile = async (reqParams) => {
+ try {
+  const { userId, filePath: profilePath } = reqParams;
+  const db = await mongo.getDB();
+  const result = await db.collection(USERS_COLLECTION).updateOne({ _id: mongo.getId(userId) }, { $set: { profilePath, modifiedAt: new Date() } });
+  return { status: true, message: 'Profile uploaded successfully' };
+ } catch (error) {
+  throw new Error("Failed to upload profile: " + error.message);
  }
 }

@@ -7,6 +7,10 @@ global.PASSWORD = process.env.PASSWORD;
 global.SECRET_KEY = process.env.SECRET_KEY;
 global.EMAIL = process.env.EMAIL;
 global.MAIL_PASSWORD = process.env.MAIL_PASSWORD;
+global.AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+global.AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+global.AWS_REGION = process.env.AWS_REGION;
+global.AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 
 global.USERS_COLLECTION = 'users';
 global.TODOS_COLLECTION = 'todos';

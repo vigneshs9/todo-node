@@ -45,3 +45,12 @@ exports.forgotPassword = async (req, res) => {
   res.status(500).json({ success: false, message: error.message });
  }
 }
+exports.uploadProfile = async (req, res) => {
+ try {
+  const reqParams = req.body || {};
+  const result = await loginModel.uploadProfile(reqParams);
+  res.status(200).json(result);
+ } catch (error) {
+  res.status(500).json({ success: false, message: error.message });
+ }
+}
