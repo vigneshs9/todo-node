@@ -15,7 +15,7 @@ exports.getUploadUrl = async (reqParams) => {
 
   return { status: true, signedUrl, fileUrl };
  } catch (error) {
-  throw new Error('Failed to generate signed URL');
+  throw new Error('Failed to generate signed URL' + error.message);
  }
 }
 
@@ -27,6 +27,6 @@ exports.getSignedUrl = async (reqParams) => {
 
   return { status: true, signedUrl };
  } catch (error) {
-  throw new Error('Failed to generate signed URL');
+  throw new Error('Failed to generate signed URL' + error.message);
  }
 }
