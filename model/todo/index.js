@@ -2,13 +2,13 @@ const mongo = require('../../config/db')
 
 exports.createTodo = async (reqParams) => {
  try {
-  const { title, date, userId } = reqParams
+  const { title, date, userId, description } = reqParams
   const db = await mongo.getDB();
   const isTitleExists = await db.collection(TODOS_COLLECTION).findOne({ title: { $regex: `^${title}$`, $options: 'i' }, todoDate: new Date(date), userId: mongo.getId(userId) });
   if (isTitleExists) {
    throw new Error('Todo already exists with this title')
   }
-  const insertObj = { title, todoDate: new Date(date), userId: mongo.getId(userId), createdAt: new Date(), status: 1 }
+  const insertObj = { title, todoDate: new Date(date), userId: mongo.getId(userId), createdAt: new Date(), status: 1, description }
   const result = await db.collection(TODOS_COLLECTION).insertOne(insertObj);
   if (result.insertedId) {
    return { status: true, message: 'Todo created successfully', todoId: result.insertedId }
@@ -33,7 +33,7 @@ exports.fetchTodo = async (reqParams) => {
     }
    },
    {
-    $project: { title: 1, todoDate: 1, createdAt: 1, todoDateDMY: 1 }
+    $project: { title: 1, todoDate: 1, createdAt: 1, todoDateDMY: 1, description: 1 }
    }
   ]
   const todos = await db.collection(TODOS_COLLECTION).aggregate(pipeline).toArray();
@@ -53,10 +53,10 @@ exports.deleteTodo = async (reqParams) => {
 }
 exports.updateTodo = async (reqParams) => {
  try {
-  const { todoId, title, date } = reqParams;
+  const { todoId, title, date, description } = reqParams;
   const db = await mongo.getDB();
   const updateObj = {
-   title, todoDate: new Date(date), updatedAt: new Date()
+   title, todoDate: new Date(date), updatedAt: new Date(), description
   }
   const result = await db.collection(TODOS_COLLECTION).updateOne({ _id: mongo.getId(todoId) }, { $set: updateObj });
   return result;
