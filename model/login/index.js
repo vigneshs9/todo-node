@@ -67,15 +67,17 @@ exports.changePassword = async (reqParams) => {
 }
 const fetchUserWithPassword = async (reqParams) => {
  try {
-  const { name, password } = reqParams;
+  const { name, password = "" } = reqParams;
   const db = await mongo.getDB();
   const user = await db.collection(USERS_COLLECTION).findOne({ name: { $regex: `^${name}$`, $options: 'i' } });
   if (!user) {
    throw new Error('Invalid username or password');
   }
-  const isMatch = await hashPwd.comparePassword(password, user.password);
-  if (!isMatch) {
-   throw new Error('Invalid username or password');
+  if (password) {
+   const isMatch = await hashPwd.comparePassword(password, user.password);
+   if (!isMatch) {
+    throw new Error('Invalid username or password');
+   }
   }
   return user;
  } catch (error) {

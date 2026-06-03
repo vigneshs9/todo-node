@@ -17,7 +17,7 @@ router.post('/', [
 })
 router.post('/fetch',  [
  check('name').notEmpty().withMessage('Username is required'),
- check('password').notEmpty().withMessage('Password is required')
+ check('password').notEmpty().withMessage('Password is required').optional()
 ], (req, res) => {
  const errors = validationResult(req);
  if (!errors.isEmpty()) {
