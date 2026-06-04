@@ -1,27 +1,28 @@
 const jwt = require('jsonwebtoken');
 
-exports.generateToken = async (data) => {
+exports.generateToken = (data) => {
  try {
-  const token = await jwt.sign(data, SECRET_KEY);
+  const token = jwt.sign(data, SECRET_KEY, { expiresIn: '1d' });
   return token;
  } catch (error) {
   throw new Error("Error at generation of JWT")
  }
 }
-exports.verifyToken = async (req, res, next) => {
+exports.verifyToken = (req, res, next) => {
  try {
-  const token = req.headers.authorization;
-  if (!token) {
-   return res.status(400).json({ status: false, msg: "Unauthorized access" })
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+   return res.status(401).json({ status: false, msg: "Unauthorized access" })
   }
-  if (token == 'king') {
+  const token = authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : authHeader;
+  if (token == SECRET_KEY) {
    return next();
   }
   jwt.verify(token, SECRET_KEY, (err, decode) => {
    if (err)
-    return res.status(400).json({ status: false, msg: "Unauthorized access" })
+    return res.status(401).json({ status: false, msg: "Unauthorized access" })
    req.user = decode;
-   return next
+   return next();
   })
  } catch (error) {
   throw new Error("Error occur at verift token")

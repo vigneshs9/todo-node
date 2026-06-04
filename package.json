@@ -1,35 +1,35 @@
 {
-  "dependencies": {
-    "@aws-sdk/client-s3": "^3.1045.0",
-    "@aws-sdk/s3-request-presigner": "^3.1045.0",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "express-validator": "^7.2.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.16.0",
-    "nodemailer": "^8.0.7",
-    "nodemon": "^3.1.10",
-    "otp-generator": "^4.0.1"
-  },
-  "name": "login_node",
-  "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vigneshs9/login_node.git"
-  },
-  "keywords": [],
-  "author": "Vignesh",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vigneshs9/login_node/issues"
-  },
-  "homepage": "https://github.com/vigneshs9/login_node#readme",
-  "description": ""
+ "dependencies": {
+  "@aws-sdk/client-s3": "^3.1045.0",
+  "@aws-sdk/s3-request-presigner": "^3.1045.0",
+  "bcrypt": "^6.0.0",
+  "cors": "^2.8.5",
+  "dotenv": "^16.5.0",
+  "express": "^5.1.0",
+  "express-validator": "^7.2.1",
+  "jsonwebtoken": "^9.0.3",
+  "mongodb": "^6.16.0",
+  "nodemailer": "^8.0.7",
+  "nodemon": "^3.1.10",
+  "otp-generator": "^4.0.1"
+ },
+ "name": "login_node",
+ "version": "1.0.0",
+ "main": "app.js",
+ "scripts": {
+  "dev": "nodemon app.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "repository": {
+  "type": "git",
+  "url": "git+https://github.com/vigneshs9/login_node.git"
+ },
+ "keywords": [],
+ "author": "Vignesh",
+ "license": "ISC",
+ "bugs": {
+  "url": "https://github.com/vigneshs9/login_node/issues"
+ },
+ "homepage": "https://github.com/vigneshs9/login_node#readme",
+ "description": ""
 }

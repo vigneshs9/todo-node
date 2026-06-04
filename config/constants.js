@@ -11,6 +11,7 @@ global.S3_ACCESS_KEY = process.env.S3_ACCESS_KEY;
 global.S3_SECRET_KEY = process.env.S3_SECRET_KEY;
 global.AWS_REGION = process.env.AWS_REGION;
 global.AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
+global.SECRET_KEY = process.env.SECRET_KEY;
 
 global.USERS_COLLECTION = 'users';
 global.TODOS_COLLECTION = 'todos';

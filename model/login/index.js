@@ -1,10 +1,13 @@
 const e = require('express');
 const mongo = require('../../config/db');
 const hashPwd = require('../../config/password_hashing');
+const jwtHelper = require('../../config/jwt');
+
 exports.loginUser = async (reqParams) => {
  try {
   const user = await fetchUserWithPassword(reqParams);
-  return { status: true, message: 'Login successful', userId: user._id, userName: user.name, profilePath: user.profilePath || null };
+  const token = jwtHelper.generateToken(user);
+  return { status: true, message: 'Login successful', userId: user._id, userName: user.name, profilePath: user.profilePath || null, token };
  } catch (error) {
   throw new Error('Login failed: ' + error.message);
  }
