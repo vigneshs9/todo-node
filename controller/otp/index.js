@@ -1,25 +1,31 @@
 const otpModel = require('../../model/otp');
+const encryptPayload = require('../../config/encrypt_payload');
 
 exports.verifyOTP = async (req, res) => {
  try {
   const reqParams = req.body;
   const result = await otpModel.verifyOTP(reqParams);
   if (result.status) {
-   res.status(200).json(result);
+   const encryptedResult = encryptPayload.encryptResponse(result);
+   res.status(200).json(encryptedResult);
   }
   else {
-   res.status(400).json(result);
+   const encryptedResult = encryptPayload.encryptResponse(result);
+   res.status(400).json(encryptedResult);
   }
  } catch (error) {
-  throw error
+  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
+  res.status(500).json(encryptedError);
  }
 }
 exports.sendOTP = async (req, res) => {
  try {
   const reqParams = req.body;
   const result = await otpModel.sendOTP(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  throw error
+  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
+  res.status(500).json(encryptedError);
  }
 }

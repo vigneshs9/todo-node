@@ -1,56 +1,69 @@
 const loginModel = require('../../model/login');
+const encryptPayload = require('../../config/encrypt_payload');
 
 exports.loginUser = async (req, res) => {
  try {
   const reqParams = req.body || {};
   const result = await loginModel.loginUser(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  res.status(500).json({ success: false, message: error.message });
+  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+  res.status(500).json(encryptedError);
  }
 };
 exports.signupUser = async (req, res) => {
  try {
   const reqParams = req.body || {};
   const result = await loginModel.signupUser(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  res.status(500).json({ success: false, message: error.message });
+  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+  res.status(500).json(encryptedError);
  }
 };
  exports.fetchUser = async (req, res) => {
   try {
    const reqParams = req.body || {};
    const result = await loginModel.fetchUser(reqParams);
-   res.status(200).json({ status: true, data: result });
+   const encryptedResult = encryptPayload.encryptResponse({ status: true, data: result });
+   res.status(200).json(encryptedResult);
   } catch (error) {
-   res.status(500).json({ success: false, message: error.message });
+   const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+   res.status(500).json(encryptedError);
   }
 };
 exports.changePassword = async (req, res) => {
  try {
   const reqParams = req.body || {};
   const result = await loginModel.changePassword(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  res.status(500).json({ success: false, message: error.message });
+  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+  res.status(500).json(encryptedError);
  }
 };
 exports.forgotPassword = async (req, res) => {
  try {
   const reqParams = req.body || {};
   const result = await loginModel.forgotPassword(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  res.status(500).json({ success: false, message: error.message });
+  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+  res.status(500).json(encryptedError);
  }
 }
 exports.uploadProfile = async (req, res) => {
  try {
   const reqParams = req.body || {};
   const result = await loginModel.uploadProfile(reqParams);
-  res.status(200).json(result);
+  const encryptedResult = encryptPayload.encryptResponse(result);
+  res.status(200).json(encryptedResult);
  } catch (error) {
-  res.status(500).json({ success: false, message: error.message });
+  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
+  res.status(500).json(encryptedError);
  }
 }
