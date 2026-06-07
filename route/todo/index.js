@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const todoController = require('../../controller/todo');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, body } = require('express-validator');
 
 router
 .post('/', [
@@ -10,7 +10,7 @@ router
  check('userId').notEmpty().isMongoId().withMessage('userId is required'),
  check('description').notEmpty().isString().withMessage('Description is required'),
  check('taskStatus').notEmpty().isInt().withMessage('taskStatus is required'),
- check('priority').notEmpty().isInt().withMessage('priority is required')
+ body('priority').notEmpty().isInt().withMessage('priority is required')
 ], (req, res) => {
  const errors = validationResult(req);
  if (!errors.isEmpty()) {
