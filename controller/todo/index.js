@@ -8,8 +8,7 @@ exports.createTodo = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }
 exports.fetchTodo = async (req, res) => {
@@ -19,8 +18,7 @@ exports.fetchTodo = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse({status: true, data: result});
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }
 exports.deleteTodo = async (req, res) => {
@@ -30,8 +28,7 @@ exports.deleteTodo = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse({status: true, message: 'Todo deleted successfully'});
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }
 exports.updateTodo = async (req, res) => {
@@ -41,7 +38,6 @@ exports.updateTodo = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse({status: true, message: 'Todo updated successfully'});
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }

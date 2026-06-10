@@ -14,8 +14,7 @@ exports.verifyOTP = async (req, res) => {
    res.status(400).json(encryptedResult);
   }
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }
 exports.sendOTP = async (req, res) => {
@@ -25,7 +24,6 @@ exports.sendOTP = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ error: 'Internal Server Error' });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ error: 'Internal Server Error' });
  }
 }

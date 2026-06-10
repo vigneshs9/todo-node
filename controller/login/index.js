@@ -8,8 +8,7 @@ exports.loginUser = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ success: false, message: error.message });
  }
 };
 exports.signupUser = async (req, res) => {
@@ -19,8 +18,7 @@ exports.signupUser = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ success: false, message: error.message });
  }
 };
  exports.fetchUser = async (req, res) => {
@@ -30,8 +28,7 @@ exports.signupUser = async (req, res) => {
    const encryptedResult = encryptPayload.encryptResponse({ status: true, data: result });
    res.status(200).json(encryptedResult);
   } catch (error) {
-   const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-   res.status(500).json(encryptedError);
+   res.status(500).json({ success: false, message: error.message });
   }
 };
 exports.changePassword = async (req, res) => {
@@ -41,8 +38,7 @@ exports.changePassword = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ success: false, message: error.message });
  }
 };
 exports.forgotPassword = async (req, res) => {
@@ -52,8 +48,7 @@ exports.forgotPassword = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ success: false, message: error.message });
  }
 }
 exports.uploadProfile = async (req, res) => {
@@ -63,7 +58,6 @@ exports.uploadProfile = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result);
   res.status(200).json(encryptedResult);
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ success: false, message: error.message });
-  res.status(500).json(encryptedError);
+  res.status(500).json({ success: false, message: error.message });
  }
 }

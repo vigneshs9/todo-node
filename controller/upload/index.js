@@ -8,8 +8,7 @@ exports.getUploadUrl = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result)
   res.status(200).json(encryptedResult)
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ status: false, error: error.message })
-  res.status(500).json(encryptedError)
+  res.status(500).json({ status: false, error: error.message })
  }
 }
 exports.getSignedUrl = async (req, res) => {
@@ -19,7 +18,6 @@ exports.getSignedUrl = async (req, res) => {
   const encryptedResult = encryptPayload.encryptResponse(result)
   res.status(200).json(encryptedResult)
  } catch (error) {
-  const encryptedError = encryptPayload.encryptResponse({ status: false, error: error.message })
-  res.status(500).json(encryptedError)
+  res.status(500).json({ status: false, error: error.message })
  }
 }
