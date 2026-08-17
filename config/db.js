@@ -1,6 +1,8 @@
 require('./constants');
 const { MongoClient, ObjectId } = require("mongodb");
+const dns = require('dns');
 
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 const url = `mongodb+srv://${USER_NAME}:${PASSWORD}@vignesh.p5bvfjh.mongodb.net/?retryWrites=true&w=majority&appName=vignesh`;
 const client = new MongoClient(url);
 let db;
